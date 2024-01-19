@@ -1,3 +1,6 @@
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyles = createGlobalStyle`
 :root {
   /* Indigo */
   --color-brand-50: #eef2ff;
@@ -61,9 +64,7 @@
   margin: 0;
 
   /* Creating animations for dark mode */
-  transition:
-    background-color 0.3s,
-    border 0.3s;
+  transition: background-color 0.3s, border 0.3s;
 }
 
 html {
@@ -71,12 +72,10 @@ html {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: var(--color-grey-700);
 
-  transition:
-    color 0.3s,
-    background-color 0.3s;
+  transition: color 0.3s, background-color 0.3s;
   min-height: 100vh;
   line-height: 1.5;
   font-size: 1.6rem;
@@ -143,3 +142,7 @@ img {
   /* For dark mode */
   filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
 }
+
+`;
+
+export default GlobalStyles;
