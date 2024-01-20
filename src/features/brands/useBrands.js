@@ -6,10 +6,11 @@ export function useBrands() {
     isLoading,
     data: brands,
     error,
+    refetch,
   } = useQuery({
     queryKey: ['brands'],
     queryFn: getBrands,
   });
 
-  return { isLoading, brands, error };
+  return { isLoading, brands, error, refetch };
 }

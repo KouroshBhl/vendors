@@ -2,11 +2,12 @@ import Table from '../../ui/Table';
 import BrandRow from './BrandRow';
 import { useBrands } from './useBrands';
 
+import Spinner from '../../ui/Spinner';
+
 function BrandsTable() {
   const { brands, isLoading } = useBrands();
-  console.log(brands);
 
-  if (isLoading) return;
+  if (isLoading) return <Spinner />;
 
   return (
     <Table columns='1fr 1fr 1fr 1fr 1fr'>

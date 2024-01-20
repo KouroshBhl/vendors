@@ -3,14 +3,14 @@ import Table from '../../ui/Table';
 import BrandsActions from './BrandsActions';
 
 function BrandRow({ brand }) {
-  const { englishName, persianName, slugName, brandLogo } = brand;
+  const { englishName, persianName, slugName, brandLogo, id } = brand;
   return (
     <Table.Row>
       <Img src={brandLogo} />
       <Brand>{englishName}</Brand>
       <Brand>{persianName}</Brand>
       <Slug>{slugName}</Slug>
-      <BrandsActions />
+      <BrandsActions brandID={id} />
     </Table.Row>
   );
 }
