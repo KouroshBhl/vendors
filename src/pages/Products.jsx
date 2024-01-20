@@ -1,5 +1,12 @@
+import { Outlet } from 'react-router-dom';
+
 function Products() {
-  return <div>Products</div>;
+  return (
+    <div>
+      hi
+      <Outlet />
+    </div>
+  );
 }
 
 export default Products;
