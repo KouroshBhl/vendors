@@ -5,12 +5,10 @@ import { useDeleteBrand } from './useDeleteBrand';
 import Spinner from '../../ui/Spinner';
 import Modal from '../../ui/Modal';
 import ConfirmDelete from '../../ui/ConfirmDelete';
+import CreateBrandForm from './CreateBrandForm';
 
-function BrandsActions({ brandID }) {
+function BrandsActions({ brandID, data }) {
   const { isLoading, mutate } = useDeleteBrand();
-  function handleDeleteBrand() {
-    // mutate(brandID);
-  }
 
   if (isLoading) return <Spinner />;
 
@@ -24,19 +22,21 @@ function BrandsActions({ brandID }) {
         </Modal.Open>
         <Modal.Window name='delete'>
           <ConfirmDelete
-            resourceName='brand'
+            resourceName={`${data.englishName} brand`}
             onConfirm={() => mutate(brandID)}
             disabled={isLoading}
           />
         </Modal.Window>
 
-        {/* <Button onClick={handleDeleteBrand}>
-          <HiOutlineTrash />
-        </Button>
+        <Modal.Open opens='edit'>
+          <Button>
+            <HiOutlinePencilSquare />
+          </Button>
+        </Modal.Open>
 
-        <Button>
-          <HiOutlinePencilSquare />
-        </Button> */}
+        <Modal.Window name='edit'>
+          <CreateBrandForm editBrand={data} />
+        </Modal.Window>
       </Modal>
     </StyledActions>
   );

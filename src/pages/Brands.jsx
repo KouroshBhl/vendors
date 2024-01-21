@@ -4,6 +4,7 @@ import BrandsTable from '../features/brands/BrandsTable';
 import { useBrands } from '../features/brands/useBrands';
 import Spinner from '../ui/Spinner';
 import ErrorFallback from '../ui/ErrorFallback';
+import AddBrand from '../ui/AddBrand';
 
 function Brands() {
   const { isLoading, error, refetch } = useBrands();
@@ -21,6 +22,9 @@ function Brands() {
       </Row>
       <Row>
         <BrandsTable />
+        <div>
+          <AddBrand />
+        </div>
       </Row>
     </>
   );

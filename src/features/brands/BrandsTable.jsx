@@ -10,12 +10,13 @@ function BrandsTable() {
   if (isLoading) return <Spinner />;
 
   return (
-    <Table columns='1fr 1fr 1fr 1fr 1fr'>
+    <Table columns='1fr 1fr 1fr 1fr 1fr 1fr'>
       <Table.Header>
         <div>Logo</div>
         <div>English Name</div>
         <div>Persian Name</div>
         <div>Slug</div>
+        <div>Description</div>
         <div>Actions</div>
       </Table.Header>
       <Table.Body
