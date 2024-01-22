@@ -73,7 +73,7 @@ function CreateBrandForm({ onCloseModal, editBrand = {} }) {
 
       <FormRow
         label='Brand description (Perisan)'
-        error={errors?.englishName?.message}
+        error={errors?.brandLogo?.message}
       >
         <FileInput
           id='brandLogo'
