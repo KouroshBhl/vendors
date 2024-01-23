@@ -9,7 +9,7 @@ import Spinner from '../../ui/Spinner';
 import Modal from '../../ui/Modal';
 import ConfirmDelete from '../../ui/ConfirmDelete';
 import { useDeleteCategory } from './useDeleteCategory';
-import SubCategories from './SubCategories';
+import CreateCategoryForm from './CreateCategoryForm';
 
 function CategoriesActions({ categoryID, data }) {
   const { isLoading, mutate } = useDeleteCategory(categoryID);
@@ -38,16 +38,7 @@ function CategoriesActions({ categoryID, data }) {
         </Modal.Open>
 
         <Modal.Window name='edit'>
-          {/* <CreateBrandForm editBrand={data} /> */}
-        </Modal.Window>
-
-        <Modal.Open opens='subCategories'>
-          <Button>
-            <HiOutlineBars3BottomLeft />
-          </Button>
-        </Modal.Open>
-        <Modal.Window name='subCategories'>
-          <SubCategories id={categoryID} />
+          <CreateCategoryForm data={data} />
         </Modal.Window>
       </Modal>
     </StyledActions>

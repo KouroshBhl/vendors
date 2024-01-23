@@ -14,6 +14,8 @@ import GlobalStyle from './styles/GlobalStyle';
 import Categories from './pages/Categories';
 import Brands from './pages/Brands';
 import { Toaster } from 'react-hot-toast';
+import SubCategories from './features/categories/SubCategories';
+import SubSubCategories from './features/categories/SubSubCategories';
 
 const queryClient = new QueryClient();
 
@@ -32,8 +34,15 @@ function App() {
             <Route path='orders' element={<Orders />} />
             <Route path='products/all' element={<Products />} />
             <Route path='products/categories' element={<Categories />} />
+            <Route
+              path='products/categories/:subCategoryId'
+              element={<SubCategories />}
+            />
+            <Route
+              path='products/categories/:subCategoryId/:subSubCategoryId'
+              element={<SubSubCategories />}
+            />
             <Route path='products/brands' element={<Brands />} />
-
             <Route path='uisettings' element={<UiSettings />} />
             <Route path='users' element={<Users />} />
             <Route path='*' element={<PageNotFound />} />
