@@ -1,11 +1,11 @@
 import Table from '../../ui/Table';
 import BrandRow from './BrandRow';
-import { useBrands } from './useBrands';
-
+import { useFetchData } from '../../hooks/useFetchData';
 import Spinner from '../../ui/Spinner';
+import { getBrands } from '../../services/apiBrands';
 
 function BrandsTable() {
-  const { brands, isLoading } = useBrands();
+  const { data: brands, isLoading } = useFetchData('brands', getBrands);
 
   if (isLoading) return <Spinner />;
 

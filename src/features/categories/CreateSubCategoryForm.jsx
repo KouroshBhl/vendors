@@ -5,21 +5,31 @@ import FormRow from '../../ui/FormRow';
 import Button from '../../ui/Button';
 import { useCreateSubCategory } from './useCreateSubCategory';
 import { useParams } from 'react-router-dom';
+import { useEditSubCategory } from './useEditSubCategory';
 
-function CreateSubCategoryForm({ onCloseModal }) {
-  const { errors, register, handleSubmit, reset } = useForm();
+function CreateSubCategoryForm({ onCloseModal, data = {} }) {
+  const { id: catId, ...catData } = data;
+  const isEditSession = Boolean(catId);
+
+  const { errors, register, handleSubmit, reset } = useForm({
+    defaultValues: isEditSession ? catData : {},
+  });
   const { isCreatingSubCategory, mutateCreateSubCategory } =
     useCreateSubCategory();
+  const { isEditingCategory, mutateEditCategory } = useEditSubCategory();
+
   const { subCategoryId } = useParams();
   const splitCategoryParam = subCategoryId.split('-');
-  console.log(splitCategoryParam);
 
   function onSubmit(data) {
-    console.log(data);
-    mutateCreateSubCategory({
-      ...data,
-      rootCategory: splitCategoryParam.at(1),
-    });
+    if (!isEditSession)
+      mutateCreateSubCategory({
+        ...data,
+        rootCategory: splitCategoryParam.at(1),
+      });
+    else {
+      mutateEditCategory({ newData: { ...data }, id: catId });
+    }
     reset();
     onCloseModal();
   }
@@ -52,7 +62,9 @@ function CreateSubCategoryForm({ onCloseModal }) {
         />
       </FormRow>
 
-      <Button disabled={isCreatingSubCategory}>Add new sub-category</Button>
+      <Button disabled={isCreatingSubCategory || isEditingCategory}>
+        Edit sub-category
+      </Button>
     </Form>
   );
 }

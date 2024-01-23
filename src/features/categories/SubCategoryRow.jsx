@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Spinner from '../../ui/Spinner';
 import Table from '../../ui/Table';
 import Button from '../../ui/Button';
+import SubCategoriesActions from './SubCategoriesActions';
 
 function SubCategoryRow({ data }) {
   const { englishName, persianName, id } = data;
@@ -14,6 +15,7 @@ function SubCategoryRow({ data }) {
           Sub-Categories
         </Button>
       </Link>
+      <SubCategoriesActions categoryID={id} data={data} />
     </Table.Row>
   );
 }

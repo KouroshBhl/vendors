@@ -1,16 +1,20 @@
+import { useFetchData } from '../../hooks/useFetchData';
+import { getRootCategories } from '../../services/apiCategories';
 import Table from '../../ui/Table';
 import CategoryRow from './CategoryRow';
-import { useRootCategories } from './useRootCategories';
 
 function CategoriesTable() {
-  const { rootCategories } = useRootCategories();
+  const { data: rootCategories } = useFetchData(
+    'categories',
+    getRootCategories
+  );
   return (
     <Table columns='1fr 1fr 1fr 1fr'>
       <Table.Header>
         <div>Eng name</div>
         <div>IR name</div>
-        <div>Actions</div>
         <div>Sub Categories Actions</div>
+        <div>Actions</div>
       </Table.Header>
 
       <Table.Body

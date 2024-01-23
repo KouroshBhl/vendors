@@ -1,18 +1,14 @@
 import { styled } from 'styled-components';
-import {
-  HiOutlineTrash,
-  HiOutlinePencilSquare,
-  HiOutlineBars3BottomLeft,
-} from 'react-icons/hi2';
+import { HiOutlineTrash, HiOutlinePencilSquare } from 'react-icons/hi2';
 
 import Spinner from '../../ui/Spinner';
 import Modal from '../../ui/Modal';
 import ConfirmDelete from '../../ui/ConfirmDelete';
-import { useDeleteCategory } from './useDeleteCategory';
 import CreateCategoryForm from './CreateCategoryForm';
+import { useDeleteCategory } from './useDeleteCategory';
 
 function CategoriesActions({ categoryID, data }) {
-  const { isLoading, mutate } = useDeleteCategory(categoryID);
+  const { isLoading, mutate } = useDeleteCategory();
 
   if (isLoading) return <Spinner />;
 

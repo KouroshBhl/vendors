@@ -2,12 +2,16 @@ import AddCategory from '../features/categories/AddCategory';
 import CategoriesTable from '../features/categories/CategoriesTable';
 import Heading from '../ui/Heading';
 import Row from '../ui/Row';
-import { useRootCategories } from '../features/categories/useRootCategories';
 import Spinner from '../ui/Spinner';
 import ErrorFallback from '../ui/ErrorFallback';
+import { getRootCategories } from '../services/apiCategories';
+import { useFetchData } from '../hooks/useFetchData';
 
 function Categories() {
-  const { isLoading, error, refetch } = useRootCategories();
+  const { isLoading, error, refetch } = useFetchData(
+    'categories',
+    getRootCategories
+  );
 
   if (isLoading) return <Spinner />;
 

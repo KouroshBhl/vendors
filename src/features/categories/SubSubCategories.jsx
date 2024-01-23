@@ -1,18 +1,28 @@
 import { Link, useParams } from 'react-router-dom';
 import Table from '../../ui/Table';
-import { useGetSubSubCategories } from './useGetSubSubCategories';
 import SubSubCategoriesRow from './SubSubCategoryRow';
 import AddSubSubCategories from './AddSubSubCategories';
+import { getSubSubCategories } from '../../services/apiCategories';
+import Spinner from '../../ui/Spinner';
+import ErrorFallback from '../../ui/ErrorFallback';
+import { useFetchData } from '../../hooks/useFetchData';
 
 function SubSubCategories() {
   const { subSubCategoryId: getSubParam } = useParams();
   const fullParam = getSubParam?.split('-');
-  const { isLoading, subSubCategories, error, refetch } =
-    useGetSubSubCategories(fullParam.at(1));
-
-  console.log(subSubCategories);
+  const {
+    isLoading,
+    data: subSubCategories,
+    error,
+    refetch,
+  } = useFetchData('subCategories2', getSubSubCategories, fullParam.at(1));
 
   if (!subSubCategories) return;
+
+  if (isLoading) return <Spinner />;
+
+  if (error)
+    return <ErrorFallback error={error} resetErrorBoundary={refetch} />;
 
   return (
     <>

@@ -1,16 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { getRootCategories } from '../../services/apiCategories';
 
-export function useRootCategories() {
-  const {
-    isLoading,
-    data: rootCategories,
-    error,
-    refetch,
-  } = useQuery({
-    queryKey: ['categories'],
-    queryFn: getRootCategories,
+export function useFetchData(queryKey, queryFunction, id = null) {
+  const { isLoading, data, error, refetch } = useQuery({
+    queryKey: [`${queryKey}`],
+    queryFn: () => queryFunction(id),
   });
 
-  return { isLoading, rootCategories, error, refetch };
+  return { isLoading, data, error, refetch };
 }

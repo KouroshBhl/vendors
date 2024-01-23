@@ -1,13 +1,14 @@
 import Row from '../ui/Row';
 import Heading from '../ui/Heading';
 import BrandsTable from '../features/brands/BrandsTable';
-import { useBrands } from '../features/brands/useBrands';
 import Spinner from '../ui/Spinner';
 import ErrorFallback from '../ui/ErrorFallback';
 import AddBrand from '../ui/AddBrand';
+import { useFetchData } from '../hooks/useFetchData';
+import { getBrands } from '../services/apiBrands';
 
 function Brands() {
-  const { isLoading, error, refetch } = useBrands();
+  const { isLoading, error, refetch } = useFetchData('brands', getBrands);
 
   if (isLoading) return <Spinner />;
 

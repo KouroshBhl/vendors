@@ -4,6 +4,7 @@ import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
 import Button from '../../ui/Button';
 import { useCreateCategory } from './useCreateCategory';
+import { useEditCategory } from './useEditCategory';
 
 function CreateCategoryForm({ onCloseModal, data = {} }) {
   const { id: catId, ...catData } = data;
@@ -13,10 +14,14 @@ function CreateCategoryForm({ onCloseModal, data = {} }) {
   });
   const errors = formState;
   const { isCreatingCategory, mutateCreateCategory } = useCreateCategory();
+  const { isEditingCategory, mutateEditCategory } = useEditCategory();
 
   function onSubmit(data) {
-    console.log(data);
-    mutateCreateCategory({ ...data });
+    if (!isEditSession) mutateCreateCategory({ ...data });
+    else {
+      console.log(data, catId);
+      mutateEditCategory({ newData: { ...data }, id: catId });
+    }
     reset();
     onCloseModal();
   }
@@ -49,7 +54,7 @@ function CreateCategoryForm({ onCloseModal, data = {} }) {
         />
       </FormRow>
 
-      <Button disabled={isCreatingCategory}>
+      <Button disabled={isCreatingCategory || isEditingCategory}>
         {isEditSession ? 'Edit root category' : 'Add root category'}
       </Button>
     </Form>

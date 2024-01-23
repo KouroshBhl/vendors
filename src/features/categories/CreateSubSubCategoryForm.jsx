@@ -5,22 +5,33 @@ import FormRow from '../../ui/FormRow';
 import Button from '../../ui/Button';
 import { useParams } from 'react-router-dom';
 import { useCreateSubSubCategory } from './useCreateSubSubCategory';
+import { useEditSubSubCategory } from './useEditSubSubCategory';
 
-function CreateSubSubCategoryForm({ onCloseModal }) {
-  const { errors, register, handleSubmit, reset } = useForm();
+function CreateSubSubCategoryForm({ onCloseModal, data = {} }) {
+  const { id: catId, ...catData } = data;
+  const isEditSession = Boolean(catId);
+
+  const { errors, register, handleSubmit, reset } = useForm({
+    defaultValues: isEditSession ? catData : {},
+  });
   const { isCreatingSubSubCategory, mutateCreateSubSubCategory } =
     useCreateSubSubCategory();
-  const { subSubCategoryId, subCategoryId } = useParams();
+  const { isEditingCategory, mutateEditCategory } = useEditSubSubCategory();
+
+  const { subSubCategoryId } = useParams();
   const splitCategoryParam = subSubCategoryId.split('-');
-  console.log(splitCategoryParam);
 
   function onSubmit(data) {
-    console.log(data);
-    mutateCreateSubSubCategory({
-      ...data,
-      // rootCategory: splitCategoryParam.at(1),
-      subCategory1: splitCategoryParam.at(1),
-    });
+    if (!isEditSession)
+      mutateCreateSubSubCategory({
+        ...data,
+        // rootCategory: splitCategoryParam.at(1),
+        subCategory1: splitCategoryParam.at(1),
+      });
+    else {
+      mutateEditCategory({ newData: { ...data }, id: catId });
+    }
+
     reset();
     onCloseModal();
   }

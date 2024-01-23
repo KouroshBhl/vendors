@@ -1,19 +1,14 @@
 import { styled } from 'styled-components';
 import { HiOutlineTrash, HiOutlinePencilSquare } from 'react-icons/hi2';
+
 import Spinner from '../../ui/Spinner';
 import Modal from '../../ui/Modal';
 import ConfirmDelete from '../../ui/ConfirmDelete';
-import CreateBrandForm from './CreateBrandForm';
-import { useDeleteData } from '../../hooks/useDeleteData';
-import { deleteBrand } from '../../services/apiBrands';
+import CreateSubCategoryForm from './CreateSubCategoryForm';
+import { useDeleteSubCategory } from './useDeleteSubCategory';
 
-function BrandsActions({ brandID, data }) {
-  const { isLoading, mutate } = useDeleteData(
-    'Brand',
-    'brands',
-    deleteBrand,
-    brandID
-  );
+function CategoriesActions({ categoryID, data }) {
+  const { isLoading, mutate } = useDeleteSubCategory();
 
   if (isLoading) return <Spinner />;
 
@@ -27,9 +22,8 @@ function BrandsActions({ brandID, data }) {
         </Modal.Open>
         <Modal.Window name='delete'>
           <ConfirmDelete
-            resourceName={`${data.englishName} brand`}
-            onConfirm={() => mutate(brandID)}
-            disabled={isLoading}
+            resourceName={`category`}
+            onConfirm={() => mutate(categoryID)}
           />
         </Modal.Window>
 
@@ -40,14 +34,14 @@ function BrandsActions({ brandID, data }) {
         </Modal.Open>
 
         <Modal.Window name='edit'>
-          <CreateBrandForm editBrand={data} />
+          <CreateSubCategoryForm data={data} />
         </Modal.Window>
       </Modal>
     </StyledActions>
   );
 }
 
-export default BrandsActions;
+export default CategoriesActions;
 
 const StyledActions = styled.div`
   display: flex;
