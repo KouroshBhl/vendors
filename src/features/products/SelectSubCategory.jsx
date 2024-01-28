@@ -1,6 +1,5 @@
 import { useFetchData } from '../../hooks/useFetchData';
 import { getSubCategories } from '../../services/apiCategories';
-import { formatForSelection } from '../../utils/helpers';
 import SpinnerMini from '../../ui/SpinnerMini';
 import { useEffect, useRef, useState } from 'react';
 import { Select, Option } from '../../ui/Selection';

@@ -10,6 +10,12 @@ const Form = styled.form`
       background-color: var(--color-grey-0);
       border: 1px solid var(--color-grey-100);
       border-radius: var(--border-radius-md);
+      > div {
+        margin-bottom: 2.2rem;
+      }
+      > h2 {
+        margin-bottom: 1rem;
+      }
     `}
 
   ${(props) =>

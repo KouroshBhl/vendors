@@ -1,9 +1,11 @@
 import { styled } from 'styled-components';
 
 export const Select = styled.select`
-  padding: 0.8rem 1.4rem;
-  border: 1px solid var(--color-brand-500);
-  border-radius: 4px;
+  border: 1px solid var(--color-grey-300);
+  background-color: var(--color-grey-0);
+  border-radius: var(--border-radius-sm);
+  padding: 0.8rem 1.2rem;
+  box-shadow: var(--shadow-sm);
 `;
 
 export const Option = styled.option``;

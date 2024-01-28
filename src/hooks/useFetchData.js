@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export function useFetchData(queryKey, queryFunction, id = null) {
   const { isLoading, data, error, refetch } = useQuery({

@@ -61,7 +61,7 @@ const Empty = styled.p`
 
 const TableContext = createContext();
 
-function Table({ columns, children }) {
+function Table({ columns, children, isFullWidth }) {
   return (
     <TableContext.Provider value={{ columns }}>
       <StyledTable role='table'>{children}</StyledTable>

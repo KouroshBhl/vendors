@@ -1,11 +1,8 @@
-import { useFetchData } from '../../hooks/useFetchData';
-import {
-  getSubCategories,
-  getSubSubCategories,
-} from '../../services/apiCategories';
-import SpinnerMini from '../../ui/SpinnerMini';
 import { useEffect, useRef } from 'react';
+import { useFetchData } from '../../hooks/useFetchData';
+import { getSubSubCategories } from '../../services/apiCategories';
 import { Select, Option } from '../../ui/Selection';
+import SpinnerMini from '../../ui/SpinnerMini';
 
 function SelectChildCategory({ subId, register }) {
   const subCategoryField = useRef();

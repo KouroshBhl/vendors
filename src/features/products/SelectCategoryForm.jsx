@@ -15,31 +15,27 @@ function SelectCategoryForm({ control, register }) {
 
   if (isLoading) return <SpinnerMini />;
 
-  console.log(rootId);
-
   return (
-    <>
-      <h2>Select categories</h2>
-      <FormRow>
-        <Select
-          defaultValue={'DEFAULT'}
-          {...register('rootCategory', {
-            onChange: (e) => setRootId(e.target.value),
-          })}
-        >
-          <Option value='DEFAULT' disabled>
-            Select Root Category
+    <FormRow>
+      <Select
+        defaultValue={'DEFAULT'}
+        {...register('rootCategory', {
+          required: 'This feild is required',
+          onChange: (e) => setRootId(e.target.value),
+        })}
+      >
+        <Option value='DEFAULT' disabled>
+          Select Root Category
+        </Option>
+        {rootCategories.map((rootCat) => (
+          <Option key={rootCat.id} value={rootCat.id}>
+            {rootCat.englishName}
           </Option>
-          {rootCategories.map((rootCat) => (
-            <Option key={rootCat.id} value={rootCat.id}>
-              {rootCat.englishName}
-            </Option>
-          ))}
-        </Select>
+        ))}
+      </Select>
 
-        {rootId && <SelectSubCategory rootId={rootId} register={register} />}
-      </FormRow>
-    </>
+      {rootId && <SelectSubCategory rootId={rootId} register={register} />}
+    </FormRow>
   );
 }
 
