@@ -16,6 +16,7 @@ import Brands from './pages/Brands';
 import { Toaster } from 'react-hot-toast';
 import SubCategories from './features/categories/SubCategories';
 import SubSubCategories from './features/categories/SubSubCategories';
+import AddProduct from './pages/AddProduct';
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ function App() {
               element={<SubSubCategories />}
             />
             <Route path='products/brands' element={<Brands />} />
+            <Route path='products/new' element={<AddProduct />} />
             <Route path='uisettings' element={<UiSettings />} />
             <Route path='users' element={<Users />} />
             <Route path='*' element={<PageNotFound />} />

@@ -1,5 +1,7 @@
+import CategoriesActions from '../features/categories/SubCategoriesActions';
+
 function Orders() {
-  return <div>Orders</div>;
+  return <div>orders</div>;
 }
 
 export default Orders;

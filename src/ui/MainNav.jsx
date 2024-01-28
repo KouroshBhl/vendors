@@ -7,6 +7,7 @@ import {
   HiOutlineFolder,
   HiOutlineCheckBadge,
   HiOutlineCube,
+  HiOutlinePlus,
 } from 'react-icons/hi2';
 
 import NavMenu from './NavMenu';
@@ -33,6 +34,14 @@ function MainNav() {
           linkTo='all'
         >
           All Products
+        </NavMenu.NavSubMenu>
+
+        <NavMenu.NavSubMenu
+          subMenu='products'
+          icon={<HiOutlinePlus />}
+          linkTo='new'
+        >
+          New product
         </NavMenu.NavSubMenu>
 
         <NavMenu.NavSubMenu
