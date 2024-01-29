@@ -5,36 +5,47 @@ import Button from '../../ui/Button';
 import Textarea from '../../ui/Textarea';
 import SelectCategoryForm from './SelectCategoryForm';
 import Input from '../../ui/Input';
-import Row from '../../ui/Row';
 import SelectBrandForm from './SelectBrandForm';
 import SelectProductType from './SelectProductType';
 import { useState } from 'react';
 import ProductGiftcart from './ProductGiftcart';
 import ProductOptional from './ProductOptional';
+import { useCreateProductKey } from './useCreateProductKey';
+import FileInput from '../../ui/FileInput';
+import SpinnerMini from '../../ui/SpinnerMini';
+import { styled } from 'styled-components';
 
 function CreateProductForm() {
-  const { control, handleSubmit, register, errors, unregister } = useForm();
-  const [productType, setProdutType] = useState('');
+  const { control, handleSubmit, register, formState, unregister } = useForm();
+  const [productType, setProductType] = useState('');
+  const { status, mutateCreateProductKey } = useCreateProductKey();
+  const { errors } = formState;
+  console.log(errors);
 
   function onSubmit(data) {
-    console.log(data);
+    if (data.productType === 'giftcart')
+      mutateCreateProductKey({ ...data, thumbnail: data?.thumbnail?.[0] });
   }
 
   return (
     <FormProvider register={register} unregister={unregister}>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <h2>Select Categories</h2>
-        <SelectCategoryForm control={control} register={register} />
+        <Label>Select Categories *</Label>
+        <FormRow>
+          <SelectCategoryForm control={control} register={register} />
+        </FormRow>
 
-        <h2>Select Brand</h2>
-        <SelectBrandForm register={register} />
+        <FormRow label='Select Brand *'>
+          <SelectBrandForm register={register} />
+        </FormRow>
 
-        <h2>Configurations</h2>
-        <SelectProductType setProdutType={setProdutType} />
-        {productType === 'giftcart' ? <ProductGiftcart /> : <ProductOptional />}
+        <FormRow label='Product Type *'>
+          <SelectProductType setProductType={setProductType} />
+        </FormRow>
+        {productType === 'giftcart' && <ProductGiftcart />}
+        {productType === 'optional' && <ProductOptional />}
 
-        <h2>Product Title</h2>
-        <FormRow error={errors?.title?.message}>
+        <FormRow error={errors?.title?.message} label='Product Title *'>
           <Input
             {...register('title', {
               required: 'This feild is required',
@@ -42,35 +53,52 @@ function CreateProductForm() {
           />
         </FormRow>
 
-        <h2>Product Description*</h2>
-        <Row>
+        <FormRow
+          error={errors?.description?.message}
+          label='Product Description *'
+        >
           <Textarea
             {...register('description', {
               required: 'This feild is required',
             })}
           />
-        </Row>
+        </FormRow>
 
-        <h2>Before Buy*</h2>
-        <Row>
+        <FormRow label='Before Buy *' error={errors?.beforeBuy?.message}>
           <Textarea
             {...register('beforeBuy', {
               required: 'This feild is required',
             })}
           />
-        </Row>
+        </FormRow>
 
-        <div>
-          <h2>Tips</h2>
-        </div>
-        <Row>
+        <FormRow label='Product Thumbnail *' error={errors?.thumbnail?.message}>
+          <FileInput {...register('thumbnail')} />
+        </FormRow>
+
+        <FormRow label='Note for Buyers'>
           <Textarea {...register('tips')} />
-        </Row>
+        </FormRow>
 
-        <Button>Submit</Button>
+        <FormRow label='Note for other admins'>
+          <Textarea {...register('adminNote')} />
+        </FormRow>
+
+        <FormRow>
+          <Button size='large' disabled={status === 'pending'} type='loading'>
+            {status === 'pending'
+              ? 'Creating/Uploading...'
+              : 'Create new product'}
+            {status === 'pending' && <SpinnerMini />}
+          </Button>
+        </FormRow>
       </Form>
     </FormProvider>
   );
 }
 
 export default CreateProductForm;
+
+const Label = styled.label`
+  font-weight: 500;
+`;

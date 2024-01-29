@@ -31,6 +31,7 @@ function SelectSubCategory({ rootId, register }) {
         defaultValue={'DEFAULT'}
         {...register('subCategory', {
           onChange: (e) => setSubId(e.target.value),
+          valueAsNumber: true,
         })}
       >
         <Option value='DEFAULT' disabled>

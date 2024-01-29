@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createEditBrand } from '../../services/apiBrands';
 import { toast } from 'react-hot-toast';
+import { createEditBrand } from '../../services/apiBrands';
 
 export function useCreateBrand() {
   const clientQuery = useQueryClient();

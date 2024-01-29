@@ -16,12 +16,13 @@ function SelectCategoryForm({ control, register }) {
   if (isLoading) return <SpinnerMini />;
 
   return (
-    <FormRow>
+    <>
       <Select
         defaultValue={'DEFAULT'}
         {...register('rootCategory', {
           required: 'This feild is required',
           onChange: (e) => setRootId(e.target.value),
+          valueAsNumber: true,
         })}
       >
         <Option value='DEFAULT' disabled>
@@ -35,7 +36,7 @@ function SelectCategoryForm({ control, register }) {
       </Select>
 
       {rootId && <SelectSubCategory rootId={rootId} register={register} />}
-    </FormRow>
+    </>
   );
 }
 

@@ -24,7 +24,10 @@ function SelectChildCategory({ subId, register }) {
   if (isLoadingSub) return <SpinnerMini />;
 
   return (
-    <Select {...register('childCategory')} defaultValue={'DEFAULT'}>
+    <Select
+      {...register('childCategory', { valueAsNumber: true })}
+      defaultValue={'DEFAULT'}
+    >
       <Option value='DEFAULT' disabled>
         Select Sub-Category
       </Option>

@@ -1,9 +1,10 @@
 import CreateProductForm from '../features/products/CreateProductForm';
-import ProductGiftcartAddRegion from '../features/products/ProductGiftcartAddRegion';
+import Heading from '../ui/Heading';
 
 function AddProduct() {
   return (
     <>
+      <Heading>Create New Product</Heading>
       <CreateProductForm />
     </>
   );

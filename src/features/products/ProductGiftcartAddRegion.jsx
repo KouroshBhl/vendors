@@ -8,7 +8,6 @@ import Table from '../../ui/Table';
 import Input from '../../ui/Input';
 import { HiOutlineTrash } from 'react-icons/hi2';
 import { useFormContext } from 'react-hook-form';
-import { useState } from 'react';
 
 function ProductGiftcartAddRegion({ setRenderTime, valueId, loop }) {
   const { register, unregister } = useFormContext();
@@ -32,14 +31,22 @@ function ProductGiftcartAddRegion({ setRenderTime, valueId, loop }) {
   return (
     <Wrapper>
       <Table.Row>
-        <Select {...register(`giftCardValues.value${valueId}.region`)}>
+        <Select
+          {...register(`giftCardValues.region${valueId}.region`, {
+            valueAsNumber: true,
+          })}
+        >
           {regionsData.map((region) => (
             <Option key={region.id} value={region.id}>
               {region.regionEnglishName}
             </Option>
           ))}
         </Select>
-        <Select {...register(`giftCardValues.value${valueId}.currency`)}>
+        <Select
+          {...register(`giftCardValues.region${valueId}.currency`, {
+            valueAsNumber: true,
+          })}
+        >
           {currenciesData.map((currency) => (
             <Option key={currency.id} value={currency.id}>
               {currency.currencyEnglishName}
@@ -48,8 +55,19 @@ function ProductGiftcartAddRegion({ setRenderTime, valueId, loop }) {
         </Select>
         <Input
           placeholder='Enter values and seprate them with Comma ( , ) e.g: 1,5,10,20,50'
-          {...register(`giftCardValues.value${valueId}.values`)}
+          {...register(`giftCardValues.region${valueId}.values`)}
         />
+
+        <Input
+          placeholder='Purchase link recommended'
+          {...register(`giftCardValues.region${valueId}.purchaseLink`)}
+        />
+
+        <Input
+          placeholder='Note for admins'
+          {...register(`giftCardValues.region${valueId}.adminNote`)}
+        />
+
         {loop.length === valueId && (
           <StyledSvg onClick={handleRemove}>
             <HiOutlineTrash />

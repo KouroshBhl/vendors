@@ -10,23 +10,22 @@ function SelectBrandForm({ register }) {
   if (isLoading) return <SpinnerMini />;
 
   return (
-    <FormRow>
-      <Select
-        defaultValue={'DEFAULT'}
-        {...register('brand', {
-          required: 'This feild is required',
-        })}
-      >
-        <Option value='DEFAULT' disabled>
-          Select Brand
+    <Select
+      defaultValue={'DEFAULT'}
+      {...register('brand', {
+        required: 'This feild is required',
+        valueAsNumber: true,
+      })}
+    >
+      <Option value='DEFAULT' disabled>
+        Select Brand
+      </Option>
+      {data.map((rootCat) => (
+        <Option key={rootCat.id} value={rootCat.id}>
+          {rootCat.englishName}
         </Option>
-        {data.map((rootCat) => (
-          <Option key={rootCat.id} value={rootCat.id}>
-            {rootCat.englishName}
-          </Option>
-        ))}
-      </Select>
-    </FormRow>
+      ))}
+    </Select>
   );
 }
 
