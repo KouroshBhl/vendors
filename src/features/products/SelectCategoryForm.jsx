@@ -1,12 +1,11 @@
 import { useFetchData } from '../../hooks/useFetchData';
 import { getRootCategories } from '../../services/apiCategories';
 import SpinnerMini from '../../ui/SpinnerMini';
-import FormRow from '../../ui/FormRow';
 import { useState } from 'react';
 import SelectSubCategory from './SelectSubCategory';
 import { Option, Select } from '../../ui/Selection';
 
-function SelectCategoryForm({ control, register }) {
+function SelectCategoryForm({ register }) {
   const [rootId, setRootId] = useState(null);
   const { data: rootCategories, isLoading } = useFetchData(
     'categories',

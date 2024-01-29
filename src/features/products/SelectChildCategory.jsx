@@ -4,7 +4,7 @@ import { getSubSubCategories } from '../../services/apiCategories';
 import { Select, Option } from '../../ui/Selection';
 import SpinnerMini from '../../ui/SpinnerMini';
 
-function SelectChildCategory({ subId, register }) {
+function SelectChildCategory({ subId, register, rootId }) {
   const subCategoryField = useRef();
   const {
     data: subCategories,
@@ -16,9 +16,10 @@ function SelectChildCategory({ subId, register }) {
     function () {
       refetch();
       if (!subCategoryField.current) return;
+
       subCategoryField.current.clearValue();
     },
-    [subId]
+    [subId, rootId]
   );
 
   if (isLoadingSub) return <SpinnerMini />;

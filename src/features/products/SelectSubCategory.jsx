@@ -44,7 +44,13 @@ function SelectSubCategory({ rootId, register }) {
         ))}
       </Select>
 
-      {subId && <SelectChildCategory register={register} subId={subId} />}
+      {subId && (
+        <SelectChildCategory
+          register={register}
+          subId={subId}
+          rootId={rootId}
+        />
+      )}
     </>
   );
 }

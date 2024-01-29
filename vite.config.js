@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+// import eslint from 'vite-plugin-eslint';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -7,7 +8,7 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['js-big-decimal'],
   },
-  server: {
-    host: '127.0.0.1',
-  },
+  // server: {
+  //   host: '127.0.0.1',
+  // },
 });
